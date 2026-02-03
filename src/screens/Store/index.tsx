@@ -1,0 +1,209 @@
+import { StyleSheet, Text, View, FlatList, Image } from 'react-native'
+import React from 'react'
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import Header from '../../navigation/header';
+
+interface Store {
+    id: string;
+    name: string;
+    fulfillment: string | 'Self fulfill store';
+    website: string;
+    status: 'Open' | 'Deactivated';
+    role: 'Owner' | 'Staff';
+
+}
+
+// FAKE DATA - Replace with your real data from API
+const DATA: Store[] = [
+    {
+        id: '1',
+        name: 'Dianne Russell',
+        fulfillment: 'Tu Nguyen',
+        website: 'diannerussell.com',
+        status: 'Open',
+        role: 'Owner',
+
+    },
+    {
+        id: '2',
+        name: 'Nineteen Eighty-Four',
+        fulfillment: 'Self fulfill store',
+        website: 'nineteeneightyfour.shop',
+        status: 'Open',
+        role: 'Owner',
+
+    },
+    {
+        id: '3',
+        name: 'Starship Troopers',
+        fulfillment: 'FusionEdge Fulfillment',
+        website: 'starshiptroopers.us',
+        status: 'Deactivated',
+        role: 'Staff',
+
+    },
+    {
+        id: '4',
+        name: 'The Time Machine',
+        fulfillment: 'Tu Nguyen',
+        website: 'bottleshipacrosms-demo.com',
+        status: 'Open',
+        role: 'Owner',
+
+    },
+    {
+        id: '5',
+        name: 'Dionne Russell',
+        fulfillment: 'Tu Nguyen',
+        website: 'diannerussell.com',
+        status: 'Open',
+        role: 'Owner',
+
+    },
+];
+const StoreCard = ({ item }: { item: Store }) => {
+    return (
+        <View style={styles.container}>
+
+            <Image source={require('../../assets/icons/logo.png')} style={styles.image} />
+            <View style={styles.content}>
+
+                <Text style={styles.name}>{item.name}</Text>
+
+                <Text style={styles.text}>
+                    Fulfillment: <Text style={styles.textFulfillment} numberOfLines={1}
+                        ellipsizeMode="tail" >{item.fulfillment}</Text>
+                </Text>
+
+                <Text style={styles.text}> {item.website}
+                </Text>
+            </View>
+
+            <View style={styles.Bottomrow}>
+                <Text
+                    style={[
+                        styles.status,
+                        item.status === 'Open' ? styles.open : styles.deactivated,
+                    ]}
+                >
+                    {item.status}
+                </Text>
+                <Text style={styles.role}>{item.role}</Text>
+            </View>
+        </View>
+    );
+};
+
+const Store = () => {
+    return (
+        
+        <SafeAreaProvider>
+
+            <SafeAreaView style={{ flex: 1 }}>
+
+                <View style={styles.card}>
+                    <FlatList
+                        data={DATA}
+                        keyExtractor={(item) => item.id}
+                        renderItem={({ item }) => <StoreCard item={item} />}
+                    />
+                </View>
+            </SafeAreaView>
+        </SafeAreaProvider>
+    );
+};
+
+export default Store
+
+const styles = StyleSheet.create({
+    image: {
+        width: 24,
+        height: 24,
+        borderRadius: 16,
+    },
+    container: {
+        backgroundColor: '#fff',
+        padding: 16,
+        borderRadius: 16,
+        marginBottom: 12,
+        borderColor: '#ECEFF3',
+        display: 'flex',
+        alignSelf: 'flex-start',
+        flexDirection: 'row',
+        height: 120
+    },
+    card: {
+        flex: 1,
+        backgroundColor: '#F9FAFB',
+        marginHorizontal: 16,
+        marginTop: 16,
+
+    },
+    name: {
+        fontSize: 16,
+        fontWeight: '500',
+        marginBottom: 6,
+        fontStyle: 'normal',
+        fontFamily: 'Mona Sans',
+        color: '#181F39',
+        lineHeight: 24,
+    },
+    text: {
+        fontSize: 14,
+        color: '#546278',
+        marginBottom: 4,
+        fontFamily: 'Mona Sans',
+        fontWeight: '400',
+        lineHeight: 22,
+        overflow: 'hidden',
+        alignItems: 'flex-start'
+    },
+    Bottomrow: {
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        marginTop: 8,
+
+
+
+    },
+    status: {
+        fontSize: 12,
+        fontWeight: '400',
+        paddingHorizontal: 8,
+        paddingVertical: 4,
+        borderRadius: 6,
+        overflow: 'hidden',
+        textAlign: 'right'
+
+
+    },
+    open: {
+        backgroundColor: '#D7F4DF',
+        color: '#266F3C',
+    },
+    deactivated: {
+        backgroundColor: '#FEE2E2',
+        color: '#B9221C',
+    },
+    role: {
+        fontSize: 12,
+        color: '#8B99B1',
+        fontWeight: '500',
+        alignContent: 'flex-end',
+        justifyContent: 'flex-end',
+        textAlign: "right",
+        height: 30,
+    },
+    content: {
+        flex: 1,
+        flexDirection: 'column',
+        marginHorizontal: 8
+    },
+    textFulfillment: {
+        fontSize: 14,
+        color: '#181F39',
+        fontStyle: 'normal',
+        fontFamily: 'Mona Sans',
+        fontWeight: '400',
+    },
+});
