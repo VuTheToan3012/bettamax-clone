@@ -6,7 +6,7 @@ import SplashScreen from './screens/splash';
 import SignIn from './screens/SignIn';
 import Intermediate from './screens/Intermediate/Intermediate';
 import Store from './screens/Store';
-import Header from './navigation/header';
+import Header from './components/Header';
 
 const Stack = createNativeStackNavigator();
 

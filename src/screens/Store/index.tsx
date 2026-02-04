@@ -1,8 +1,7 @@
-import { StyleSheet, Text, View, FlatList, Image } from 'react-native'
+import { StyleSheet, Text, View, FlatList, Image, Pressable } from 'react-native'
 import React from 'react'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import Header from '../../navigation/header';
-
+import Header from '@/components/Header';
 interface Store {
     id: string;
     name: string;
@@ -60,11 +59,57 @@ const DATA: Store[] = [
         role: 'Owner',
 
     },
+    {
+        id: '6',
+        name: 'Dianne Russell',
+        fulfillment: 'Tu Nguyen',
+        website: 'diannerussell.com',
+        status: 'Open',
+        role: 'Owner',
+
+    },
+    {
+        id: '7',
+        name: 'Nineteen Eighty-Four',
+        fulfillment: 'Self fulfill store',
+        website: 'nineteeneightyfour.shop',
+        status: 'Open',
+        role: 'Owner',
+
+    },
+    {
+        id: '8',
+        name: 'Starship Troopers',
+        fulfillment: 'FusionEdge Fulfillment',
+        website: 'starshiptroopers.us',
+        status: 'Deactivated',
+        role: 'Staff',
+
+    },
+    {
+        id: '9',
+        name: 'The Time Machine',
+        fulfillment: 'Tu Nguyen',
+        website: 'bottleshipacrosms-demo.com',
+        status: 'Open',
+        role: 'Owner',
+
+    },
+    {
+        id: '10',
+        name: 'Dionne Russell',
+        fulfillment: 'Tu Nguyen',
+        website: 'diannerussell.com',
+        status: 'Open',
+        role: 'Owner',
+
+    },
 ];
 const StoreCard = ({ item }: { item: Store }) => {
     return (
-        <View style={styles.container}>
-
+       <Pressable >
+         <View style={styles.container}>
+            
             <Image source={require('../../assets/icons/logo.png')} style={styles.image} />
             <View style={styles.content}>
 
@@ -91,6 +136,7 @@ const StoreCard = ({ item }: { item: Store }) => {
                 <Text style={styles.role}>{item.role}</Text>
             </View>
         </View>
+       </Pressable>
     );
 };
 
@@ -98,10 +144,11 @@ const Store = () => {
     return (
         
         <SafeAreaProvider>
-
+                  
             <SafeAreaView style={{ flex: 1 }}>
-
+                 <Header />
                 <View style={styles.card}>
+                   
                     <FlatList
                         data={DATA}
                         keyExtractor={(item) => item.id}

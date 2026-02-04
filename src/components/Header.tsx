@@ -8,25 +8,27 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const Header = ({ navigation }: { navigation: any }) => {
+const Header = () => {
   const [openMenu, setOpenMenu] = useState(false);
 
   return (
     <SafeAreaView edges={["top"]} style={styles.safe}>
       <View style={styles.container}>
-
+        {/* Left */}
         <View style={styles.left}>
           <Image source={require("../assets/icons/logo.png")} style={styles.logo} />
           <Text style={styles.title}>Choose store</Text>
         </View>
 
+        {/* Right */}
         <Pressable onPress={() => setOpenMenu(!openMenu)}>
           <View style={styles.avatar} />
         </Pressable>
 
+        {/* Dropdown */}
         {openMenu && (
           <View style={styles.dropdown}>
-            <Pressable style={styles.menuItem} onPress={() => navigation.navigate('SignIn')}>
+            <Pressable style={styles.menuItem}>
               <Text style={styles.logout}>⎋ Sign out</Text>
             </Pressable>
           </View>
@@ -39,16 +41,9 @@ const Header = ({ navigation }: { navigation: any }) => {
 export default Header;
 
 const styles = StyleSheet.create({
-safe: {
-  position: 'absolute',
-  top: 0,
-  left: 0,
-  right: 0,
-  backgroundColor: '#fff',
-
-  zIndex: 1000,
-  elevation: 1000, // Android sống chết cần
-},
+  safe: {
+    backgroundColor: "#FFFFFF",
+  },
   container: {
     height: 56,
     paddingHorizontal: 16,
@@ -57,8 +52,6 @@ safe: {
     justifyContent: "space-between",
     borderBottomWidth: 1,
     borderBottomColor: "#eee",
-    position: 'relative', // QUAN TRỌNG
-    zIndex: 100,
   },
   left: {
     flexDirection: "row",
@@ -86,20 +79,22 @@ safe: {
     backgroundColor: "#e5e7eb",
   },
   dropdown: {
-    position: 'absolute',
-    top: 56,          // ngay dưới header
+    position: "absolute",
+    top: 56,
     right: 16,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     borderRadius: 8,
     paddingVertical: 8,
+    width: 140,
 
-    zIndex: 1000,
-    elevation: 1000, // Android
-
-    shadowColor: '#000',
-    shadowOpacity: 0.2,
-    shadowRadius: 8,
+    // shadow iOS
+    shadowColor: "#000",
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
     shadowOffset: { width: 0, height: 4 },
+
+    // shadow Android
+    elevation: 5,
   },
   menuItem: {
     paddingHorizontal: 12,

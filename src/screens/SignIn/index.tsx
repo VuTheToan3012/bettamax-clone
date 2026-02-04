@@ -2,9 +2,34 @@ import { StyleSheet, Text, View, Image, Linking, TouchableOpacity, } from 'react
 import React, { useState } from 'react'
 import TextFieldComp from '../../components/TextFieldComp';
 import RoundBottonComp from '../../navigation/RoundButtonComp';
+import EYE from '../../assets/icons/eye.svg'
+import MAIL from '../../assets/icons/mail.svg'
+import LOCK from '../../assets/icons/lock-filled.svg'
 const url = 'https://google.com';
+import { USERS } from '@/types';
+import EmailIcon from '@/components/icons/EmailIcon';
+import PasswordIcon from '@/components/icons/PasswordIcon';
+import LockIcon from '@/components/icons/LockIcon';
+import GoogleIcon from '@/components/icons/GoogleIcon';
+
 
 const SignIn = ({ navigation }: { navigation: any }) => {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const handleLogin = () => {
+        if (!email || !password) {
+            alert('Please enter email and password')
+            return
+        }
+        const user = USERS.find(
+            u => u.email === email && u.password === password
+        )
+        if (!user) {
+            alert('Email or password is incorrect')
+            return
+        }
+        navigation.navigate('Intermediate', { user })
+    }
     return (
         <View style={styles.container}>
             <View style={styles.logCard}>
@@ -17,25 +42,32 @@ const SignIn = ({ navigation }: { navigation: any }) => {
                     </Text>
                 </Text>
 
-               <View style={styles.TextField}>
-            
-                 <TextFieldComp  placeholder="Email" keyboardType="email-address" />
-               </View>
+                <View style={styles.TextField} >
+                        <EmailIcon style={styles.icon} />
+                    <TextFieldComp placeholder="Email" keyboardType="email-address" value={email}
+                        onChangeText={setEmail} />
+                </View>
                 <View style={styles.TextField}>
-                    <TextFieldComp  placeholder="Password" secureTextEntry={true} />
-                    </View>
+                    <PasswordIcon style={styles.icon} />
+                    <TextFieldComp placeholder="Password" secureTextEntry={true} value={password}
+                        onChangeText={setPassword} />
+                        <LockIcon style={styles.icon2} />
+                </View>
                 <Text style={styles.forgetText} onPress={() => Linking.openURL(url)}>Forget Password?</Text>
-                <RoundBottonComp label="Continue" onPress={() => navigation.navigate('Intermediate')} />
-                    
+                <RoundBottonComp label="Continue" onPress={handleLogin} />
+
                 <Text style={styles.text1}>Don’t have an account yet?</Text>
-                <RoundBottonComp border={true} label="Sign in with Google" onPress={() => Linking.openURL(url)} />
+                <View>
+                <GoogleIcon style={styles.icon} />
+                    <RoundBottonComp border={true} label="Sign in with Google" onPress={() => Linking.openURL(url)} />
+                </View>
             </View>
             <Text style={styles.text3}>By clicking “Continue”, I have read and agree with the</Text>
             <Text style={styles.text3}>
-                <Text style={styles.text2} onPress={() => Linking.openURL(url)}>Terms
+                <Text style={styles.text6} onPress={() => Linking.openURL(url)}>Terms
                 </Text>
                 {' and '}
-                <Text style={styles.text2} onPress={() => Linking.openURL(url)}>Privacy Policy
+                <Text style={styles.text6} onPress={() => Linking.openURL(url)}>Privacy Policy
                 </Text>
             </Text>
         </View>
@@ -71,6 +103,7 @@ const styles = StyleSheet.create({
         width: 48,
         height: 48,
         alignSelf: 'center',
+        marginTop: 28,
 
     },
     TextField: {
@@ -82,7 +115,7 @@ const styles = StyleSheet.create({
         borderRadius: 12,
         marginBottom: 16,
         width: '100%',
-        flexDirection:'row'
+        flexDirection: 'row'
 
 
     },
@@ -117,7 +150,8 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         fontStyle: 'normal',
         fontSize: 18,
-        fontFamily: 'Mona Sans'
+        fontFamily: 'Mona Sans',
+        marginTop: 16,
     },
     text3: {
         fontSize: 14,
@@ -126,6 +160,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Mona Sans',
         fontWeight: '400',
         color: '#546278',
+        marginTop: 4,
     },
     text4: {
         fontSize: 14,
@@ -134,6 +169,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Mona Sans',
         fontWeight: '400',
         color: '#4B56F3',
+        marginTop: 4,
     },
     text5: {
         alignSelf: 'center',
@@ -142,4 +178,24 @@ const styles = StyleSheet.create({
         fontStyle: 'normal',
         fontSize: 14,
         fontFamily: 'Mona Sans'
-}});
+    },
+    text6: {
+        alignSelf: 'center',
+        fontWeight: '500',
+        fontStyle: 'normal',
+        fontSize: 14,
+        fontFamily: 'Mona Sans',
+        color: '#000000',
+        lineHeight: 22,
+    },
+    icon:{
+        alignSelf: 'center',
+        marginLeft:12,
+        marginRight: 8,
+    },
+    icon2:{
+        alignSelf:'center',
+        marginRight: 12,
+        marginLeft: 8,
+    }
+});
