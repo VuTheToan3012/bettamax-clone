@@ -2,9 +2,6 @@ import { StyleSheet, Text, View, Image, Linking, TouchableOpacity, } from 'react
 import React, { useState } from 'react'
 import TextFieldComp from '../../components/TextFieldComp';
 import RoundBottonComp from '../../navigation/RoundButtonComp';
-import EYE from '../../assets/icons/eye.svg'
-import MAIL from '../../assets/icons/mail.svg'
-import LOCK from '../../assets/icons/lock-filled.svg'
 const url = 'https://google.com';
 import { USERS } from '@/types';
 import EmailIcon from '@/components/icons/EmailIcon';

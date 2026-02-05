@@ -14,18 +14,16 @@ const Header = () => {
   return (
     <SafeAreaView edges={["top"]} style={styles.safe}>
       <View style={styles.container}>
-        {/* Left */}
+
         <View style={styles.left}>
           <Image source={require("../assets/icons/logo.png")} style={styles.logo} />
           <Text style={styles.title}>Choose store</Text>
         </View>
 
-        {/* Right */}
         <Pressable onPress={() => setOpenMenu(!openMenu)}>
           <View style={styles.avatar} />
         </Pressable>
 
-        {/* Dropdown */}
         {openMenu && (
           <View style={styles.dropdown}>
             <Pressable style={styles.menuItem}>
@@ -87,13 +85,10 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     width: 140,
 
-    // shadow iOS
     shadowColor: "#000",
     shadowOpacity: 0.1,
     shadowRadius: 10,
     shadowOffset: { width: 0, height: 4 },
-
-    // shadow Android
     elevation: 5,
   },
   menuItem: {

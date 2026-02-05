@@ -1,16 +1,30 @@
-import { View, Text, TextInput, Keyboard } from 'react-native'
-import React from 'react'
+import { View, Text, TextInput, StyleSheet } from 'react-native'
+import React, { forwardRef } from 'react'
 
-export default function TextFieldComp({ onChangeText ,value, placeholder, secureTextEntry, keyboardType}: { onChangeText: any, value: any,  placeholder: any, secureTextEntry?: boolean, keyboardType?: any}) {
-  return (
-    <View >
-      <TextInput placeholder={placeholder}
-      keyboardType={keyboardType}
-      secureTextEntry={secureTextEntry}
-      value={value}
-      onChangeText={onChangeText}
-      
+const TextFieldComp = forwardRef<TextInput, any>(
+  ({ onChangeText, value, placeholder, secureTextEntry, keyboardType }, ref) => {
+    return (
+      <TextInput 
+        ref={ref}
+        placeholder={placeholder}
+        keyboardType={keyboardType}
+        secureTextEntry={secureTextEntry}
+        value={value}
+        onChangeText={onChangeText}
+        style={styles.input}
+        placeholderTextColor="#8B99B1"
       />
-    </View>
-  )
-}
+    )
+  }
+)
+
+const styles = StyleSheet.create({
+  input: {
+    flex: 1,
+    fontSize: 15,
+    color: '#000',
+    paddingVertical: 14,
+  }
+})
+
+export default TextFieldComp
