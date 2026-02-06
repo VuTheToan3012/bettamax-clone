@@ -12,7 +12,7 @@ interface RevenueChartProps {
   data?: number[];
 }
 
-export default function RevenueChart({ data: propData }: RevenueChartProps) {
+export default function CR({ data: propData }: RevenueChartProps) {
     const data = propData || [7000, 9000, 6000, 10000, 4000, 8000, 5000, 9000, 3000, 6000];
     const data2 = [4200, 5200, 6100, 7000, 7800, 8600, 9300, 9800, 10200, 11000];
     

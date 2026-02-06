@@ -2,18 +2,18 @@ import { StyleSheet, Text, View, FlatList, Image, Pressable } from 'react-native
 import React from 'react'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import Header from '@/components/Header';
-interface Store {
+import { useNavigation } from '@react-navigation/native';
+
+export interface Store {
     id: string;
     name: string;
-    fulfillment: string | 'Self fulfill store';
-    website: string;
     status: 'Open' | 'Deactivated';
+    fulfillment: string;
+    website: string;
     role: 'Owner' | 'Staff';
-
 }
 
-// FAKE DATA - Replace with your real data from API
-const DATA: Store[] = [
+export const DATA: Store[] = [
     {
         id: '1',
         name: 'Dianne Russell',
@@ -21,7 +21,6 @@ const DATA: Store[] = [
         website: 'diannerussell.com',
         status: 'Open',
         role: 'Owner',
-
     },
     {
         id: '2',
@@ -30,7 +29,6 @@ const DATA: Store[] = [
         website: 'nineteeneightyfour.shop',
         status: 'Open',
         role: 'Owner',
-
     },
     {
         id: '3',
@@ -39,116 +37,51 @@ const DATA: Store[] = [
         website: 'starshiptroopers.us',
         status: 'Deactivated',
         role: 'Staff',
-
-    },
-    {
-        id: '4',
-        name: 'The Time Machine',
-        fulfillment: 'Tu Nguyen',
-        website: 'bottleshipacrosms-demo.com',
-        status: 'Open',
-        role: 'Owner',
-
-    },
-    {
-        id: '5',
-        name: 'Dionne Russell',
-        fulfillment: 'Tu Nguyen',
-        website: 'diannerussell.com',
-        status: 'Open',
-        role: 'Owner',
-
-    },
-    {
-        id: '6',
-        name: 'Dianne Russell',
-        fulfillment: 'Tu Nguyen',
-        website: 'diannerussell.com',
-        status: 'Open',
-        role: 'Owner',
-
-    },
-    {
-        id: '7',
-        name: 'Nineteen Eighty-Four',
-        fulfillment: 'Self fulfill store',
-        website: 'nineteeneightyfour.shop',
-        status: 'Open',
-        role: 'Owner',
-
-    },
-    {
-        id: '8',
-        name: 'Starship Troopers',
-        fulfillment: 'FusionEdge Fulfillment',
-        website: 'starshiptroopers.us',
-        status: 'Deactivated',
-        role: 'Staff',
-
-    },
-    {
-        id: '9',
-        name: 'The Time Machine',
-        fulfillment: 'Tu Nguyen',
-        website: 'bottleshipacrosms-demo.com',
-        status: 'Open',
-        role: 'Owner',
-
-    },
-    {
-        id: '10',
-        name: 'Dionne Russell',
-        fulfillment: 'Tu Nguyen',
-        website: 'diannerussell.com',
-        status: 'Open',
-        role: 'Owner',
-
     },
 ];
+
 const StoreCard = ({ item }: { item: Store }) => {
+    const navigation = useNavigation();
+
+    const handlePress = () => {
+        navigation.navigate('Storeperformance', { storeId: item.id, storeName: item.name });
+    };
+
     return (
-       <Pressable >
-         <View style={styles.container}>
-            
-            <Image source={require('../../assets/icons/logo.png')} style={styles.image} />
-            <View style={styles.content}>
+        <Pressable onPress={handlePress}>
+            <View style={styles.container}>
+                <Image source={require('../../assets/icons/logo.png')} style={styles.image} />
+                <View style={styles.content}>
+                    <Text style={styles.name}>{item.name}</Text>
+                    <Text style={styles.text}>
+                        Fulfillment: <Text style={styles.textFulfillment} numberOfLines={1}
+                            ellipsizeMode="tail">{item.fulfillment}</Text>
+                    </Text>
+                    <Text style={styles.text}>{item.website}</Text>
+                </View>
 
-                <Text style={styles.name}>{item.name}</Text>
-
-                <Text style={styles.text}>
-                    Fulfillment: <Text style={styles.textFulfillment} numberOfLines={1}
-                        ellipsizeMode="tail" >{item.fulfillment}</Text>
-                </Text>
-
-                <Text style={styles.text}> {item.website}
-                </Text>
+                <View style={styles.Bottomrow}>
+                    <Text
+                        style={[
+                            styles.status,
+                            item.status === 'Open' ? styles.open : styles.deactivated,
+                        ]}
+                    >
+                        {item.status}
+                    </Text>
+                    <Text style={styles.role}>{item.role}</Text>
+                </View>
             </View>
-
-            <View style={styles.Bottomrow}>
-                <Text
-                    style={[
-                        styles.status,
-                        item.status === 'Open' ? styles.open : styles.deactivated,
-                    ]}
-                >
-                    {item.status}
-                </Text>
-                <Text style={styles.role}>{item.role}</Text>
-            </View>
-        </View>
-       </Pressable>
+        </Pressable>
     );
 };
 
 const Store = () => {
     return (
-        
         <SafeAreaProvider>
-                  
             <SafeAreaView style={{ flex: 1 }}>
-                 <Header />
+                <Header />
                 <View style={styles.card}>
-                   
                     <FlatList
                         data={DATA}
                         keyExtractor={(item) => item.id}
@@ -184,7 +117,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#F9FAFB',
         marginHorizontal: 16,
         marginTop: 16,
-
     },
     name: {
         fontSize: 16,
@@ -209,9 +141,6 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'space-between',
         marginTop: 8,
-
-
-
     },
     status: {
         fontSize: 12,
@@ -221,8 +150,6 @@ const styles = StyleSheet.create({
         borderRadius: 6,
         overflow: 'hidden',
         textAlign: 'right'
-
-
     },
     open: {
         backgroundColor: '#D7F4DF',
