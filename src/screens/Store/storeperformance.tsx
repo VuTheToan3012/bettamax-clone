@@ -3,6 +3,10 @@ import React from 'react'
 import RevenueChart from './LineGraph'
 import { useRoute } from '@react-navigation/native'
 import CR from './CR'
+import TopProductBarChart from './TopProduct'
+import DonutChart from './session'
+import SessionByDeviceChart from './session'
+SessionByDeviceChart
 // Mock data cho mỗi store
 const STORE_PERFORMANCE_DATA = {
   '1': [7000, 9000, 6000, 10000, 4000, 8000, 5000, 9000, 3000, 6000],
@@ -22,9 +26,13 @@ const Storeperformance = () => {
         <Text style={{ fontSize: 20, fontWeight: '600', marginBottom: 8 }}>
     
         </Text>
-        <RevenueChart data={revenueData} />
-        <CR data={revenueData} />
-
+      <ScrollView>
+          <RevenueChart data={revenueData} />
+         <CR />
+        
+         <TopProductBarChart/>
+        <SessionByDeviceChart />
+      </ScrollView>
       </View>
     </View>
   )
