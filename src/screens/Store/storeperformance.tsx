@@ -1,3 +1,4 @@
+  //storeperformance
 import { View, Text ,ScrollView} from 'react-native'
 import React from 'react'
 import RevenueChart from './LineGraph'

@@ -1,3 +1,4 @@
+//index
 import { StyleSheet, Text, View, FlatList, Image, Pressable } from 'react-native'
 import React from 'react'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
