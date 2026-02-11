@@ -4,6 +4,7 @@ import React from 'react'
 type RoundButtonCompProps = {
   label: React.ReactNode
   border?: boolean
+  icon?: React.ReactNode
   onPress?: () => void
 }
 

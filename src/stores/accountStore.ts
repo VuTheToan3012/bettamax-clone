@@ -7,15 +7,13 @@ import { Account } from '@/types';
 interface AccountState {
   account: Account | null;
   isLoggedIn: boolean;
-  
-  // Actions
+
   setAccount: (account: Account) => void;
   updateAccount: (data: Partial<Account>) => void;
   logout: () => void;
   clearAccount: () => void;
 }
 
-// MMKV storage adapter cho Zustand
 const mmkvStorage = {
   getItem: (name: string) => {
     const value = storage.getString(name);
@@ -52,7 +50,7 @@ export const useAccountStore = create<AccountState>()(
       },
     }),
     {
-      name: 'account-storage', // key lưu trong MMKV
+      name: 'account-storage', 
       storage: createJSONStorage(() => mmkvStorage),
     }
   )

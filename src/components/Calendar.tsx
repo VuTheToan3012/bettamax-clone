@@ -8,12 +8,12 @@ import {
 } from 'react-native';
 import { CalendarList, DateData } from 'react-native-calendars';
 
+
 type QuickSelectOption = 'today' | 'week' | 'month' | 'year';
 
 interface DatePickerProps {
   value?: string; // Format: YYYY-MM-DD
   onDateChange: (date: string) => void;
-  placeholder?: string;
   minDate?: string;
   maxDate?: string;
 }
@@ -21,7 +21,6 @@ interface DatePickerProps {
 const DatePicker: React.FC<DatePickerProps> = ({
   value,
   onDateChange,
-  placeholder = 'Today',
   minDate,
   maxDate,
 }) => {
@@ -77,14 +76,14 @@ const DatePicker: React.FC<DatePickerProps> = ({
   }, [value, formatDateToString]);
 
   const formatDisplayDate = useCallback((dateString: string): string => {
-    if (!dateString) return placeholder;
+    if (!dateString) return 'Today';
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'short',
       day: 'numeric',
     });
-  }, [placeholder]);
+  }, []);
 
   const getMarkedDates = useCallback(() => {
     if (!tempSelectedDate) return {};
@@ -105,9 +104,8 @@ const DatePicker: React.FC<DatePickerProps> = ({
         activeOpacity={0.7}
       >
         <Text style={[styles.inputText, !value && styles.placeholder]}>
-          {value ? formatDisplayDate(value) : placeholder}
+          {formatDisplayDate(value || '')}
         </Text>
-        <Text style={styles.icon}>📅</Text>
       </TouchableOpacity>
 
       <Modal
@@ -259,8 +257,10 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingHorizontal: 16,
     paddingVertical: 12,
-    width: 90,
-    elevation: 4
+    width: 180,
+    elevation: 4,
+    margin: 22,
+    height: 44,
   },
   inputText: {
     fontSize: 15,
@@ -278,6 +278,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-end',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    
   },
   calendarContainer: {
     backgroundColor: '#FFFFFF',
@@ -298,6 +299,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
     fontWeight: '600',
     color: '#1A1A1A',
+    alignContent:'center'
   },
   closeButton: {
     width: 28,

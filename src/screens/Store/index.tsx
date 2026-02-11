@@ -51,7 +51,7 @@ const StoreCard = ({ item }: { item: Store }) => {
     return (
         <Pressable onPress={handlePress}>
             <View style={styles.container}>
-                <Image source={require('../../assets/icons/logo.png')} style={styles.image} />
+                <Image source={require('../../assets/icons/Vector.png')} style={styles.image} />
                 <View style={styles.content}>
                     <Text style={styles.name}>{item.name}</Text>
                     <Text style={styles.text}>
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     image: {
         width: 24,
         height: 24,
-        borderRadius: 16,
+        borderRadius: 2,
     },
     container: {
         backgroundColor: '#fff',

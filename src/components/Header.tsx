@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
 import {
   View,
@@ -10,6 +11,15 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 const Header = () => {
   const [openMenu, setOpenMenu] = useState(false);
+  const navigation = useNavigation();
+
+  const handleSignOut = () => {
+    setOpenMenu(false);
+    navigation.reset({
+      index: 0,
+      routes: [{name:'SignIn'}],
+    })
+  }
 
   return (
     <SafeAreaView edges={["top"]} style={styles.safe}>
@@ -26,8 +36,9 @@ const Header = () => {
 
         {openMenu && (
           <View style={styles.dropdown}>
-            <Pressable style={styles.menuItem}>
-              <Text style={styles.logout}>⎋ Sign out</Text>
+            <Pressable style={styles.menuItem} onPress={handleSignOut}>
+              <Text style={styles.logout}>Sign out</Text>
+              
             </Pressable>
           </View>
         )}
@@ -41,6 +52,7 @@ export default Header;
 const styles = StyleSheet.create({
   safe: {
     backgroundColor: "#FFFFFF",
+    zIndex: 999, // Thêm zIndex cho SafeAreaView
   },
   container: {
     height: 56,
@@ -50,6 +62,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     borderBottomWidth: 1,
     borderBottomColor: "#eee",
+    zIndex: 999, // Thêm zIndex cho container
   },
   left: {
     flexDirection: "row",
@@ -84,7 +97,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingVertical: 8,
     width: 140,
-
+    zIndex: 1000, // Thêm zIndex cao hơn cho dropdown
     shadowColor: "#000",
     shadowOpacity: 0.1,
     shadowRadius: 10,

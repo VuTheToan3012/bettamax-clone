@@ -5,16 +5,12 @@ import type { Product } from '@/types';
 const ProductItem = ({ item }: { item: Product }) => {
     return (
         <View style={styles.card}>
-            <Image source={{ uri: item.image }} style={styles.avatar} />
+
             <View style={styles.statsRow}>
                 <View style={styles.statItem}>
-                    <Text
-                        style={styles.title}
-                        numberOfLines={2}
-                        ellipsizeMode="tail"
-                    >
-                        {item.name}
-                    </Text>
+                    <View style={styles.traffic}>
+                        <Text>{item.traffic}</Text>
+                    </View>
                 </View>
                 <View style={styles.statItem}>
                     <Text style={styles.label}>Subtotal</Text>
@@ -36,7 +32,7 @@ const ProductItem = ({ item }: { item: Product }) => {
 };
 
 
-export default function Product() {
+export default function Traffic() {
     return (
         <FlatList
 
@@ -96,4 +92,10 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         marginTop: 2,
     },
+    traffic: {
+        borderRadius: 24,
+        backgroundColor: "#48ddc7",
+        alignContent:'center',
+        justifyContent: 'center'
+    }
 });
