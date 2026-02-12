@@ -4,6 +4,8 @@ import React from 'react'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import Header from '@/components/Header';
 import { useNavigation } from '@react-navigation/native';
+import StoreIcon from '@/components/icons/StoreIcon';
+
 
 export interface Store {
     id: string;
@@ -51,7 +53,7 @@ const StoreCard = ({ item }: { item: Store }) => {
     return (
         <Pressable onPress={handlePress}>
             <View style={styles.container}>
-                <Image source={require('../../assets/icons/Vector.png')} style={styles.image} />
+                <View style={styles.iconborder}><StoreIcon /></View>
                 <View style={styles.content}>
                     <Text style={styles.name}>{item.name}</Text>
                     <Text style={styles.text}>
@@ -115,7 +117,7 @@ const styles = StyleSheet.create({
     },
     card: {
         flex: 1,
-        backgroundColor: '#F9FAFB',
+        backgroundColor: '#f2f2f2',
         marginHorizontal: 16,
         marginTop: 16,
     },
@@ -181,4 +183,12 @@ const styles = StyleSheet.create({
         fontFamily: 'Mona Sans',
         fontWeight: '400',
     },
+    iconborder:{
+        width:24,
+        height:24,
+        borderRadius:5,
+        backgroundColor:'#D6D4FE',
+        alignItems:'center',
+        justifyContent:'center'
+    }
 });

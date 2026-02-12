@@ -21,13 +21,13 @@ const App = () => {
       <Stack.Navigator >
         {/* <Stack.Screen name="SplashScreen" component={SplashScreen} options={{ headerShown: false }} />
         <Stack.Screen name="SignIn" component={SignIn} options={{ headerShown: false }} />
-        <Stack.Screen name="Intermediate" component={Intermediate} options={{ headerShown: false }} />
-        <Stack.Screen name="Store" component={Store} options={{ headerShown: false }} />
-        <Stack.Screen name="Header" component={Header} options={{ headerShown: false }} />
-        <Stack.Screen name="Storeperformance" component={Storeperformance} options={{ headerShown: false }} />
+        <Stack.Screen name="Intermediate" component={Intermediate} options={{ headerShown: false }} /> 
         <Stack.Screen name="Datepicker" component={DatePicker} options={{ headerShown: false }} /> */}
         {/* <Stack.Screen name="Traffic" component={Traffic} options={{ headerShown: false }} /> */}
-        <Stack.Screen name="BottomTabs" component={BottomTabs} options={{ headerShown: false }} />
+        <Stack.Screen name="Store" component={Store} options={{ headerShown: false }} />
+
+        <Stack.Screen name="Storeperformance" component={Storeperformance} options={{ headerShown: false }} />
+
       </Stack.Navigator>
     </NavigationContainer>
 

@@ -13,8 +13,9 @@ import LogOutIcon from "./icons/LogOutIcon";
 import DownIcon from "./icons/DownIcon";
 import AccountIcon1 from "./icons/AccountIcon1";
 import UpIcon from "./icons/UpIcon";
+import NotiIcon from "./icons/NotiIcon";
 
-const Header = () => {
+const PerformanceHeader = () => {
   const [openMenu, setOpenMenu] = useState(false);
   const navigation = useNavigation<any>();
 
@@ -35,27 +36,24 @@ const Header = () => {
       <TouchableWithoutFeedback onPress={() => setOpenMenu(false)}>
         <View>
           <View style={styles.container}>
-            <View style={styles.left}>
-              <Image
-                source={require("../assets/icons/logo.png")}
-                style={styles.logo}
-              />
-              <Text style={styles.title}>Choose store</Text>
-            </View>
-
             <Pressable style={styles.right} onPress={toggleMenu}>
+              <Text style={styles.text}>Store performance</Text>
               {openMenu ? <UpIcon /> : <DownIcon />}
-              <AccountIcon1 />
             </Pressable>
-          </View>
+            <Pressable>
+              <NotiIcon />
+            </Pressable>
 
+
+          </View>
           {openMenu && (
             <View style={styles.dropdownWrapper}>
               <View style={styles.arrow} />
               <View style={styles.dropdown}>
                 <Pressable style={styles.menuItem} onPress={handleSignOut}>
-                  <LogOutIcon />
-                  <Text style={styles.logout}>Sign out</Text>
+
+                  <Text> Product performance</Text>
+
                 </Pressable>
               </View>
             </View>
@@ -66,7 +64,7 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default PerformanceHeader;
 
 const styles = StyleSheet.create({
   safe: {
@@ -112,7 +110,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 35,
     right: 16,
-    alignItems: "flex-end",
+    alignItems: "flex-start",
     zIndex: 2000,
     borderRadius: 4,
   },
@@ -151,4 +149,10 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     fontSize: 15,
   },
+  text: {
+    fontFamily: 'Mona Sans',
+    fontWeight: '500',
+    fontSize: 16,
+    fontStyle: 'normal',
+  }
 });

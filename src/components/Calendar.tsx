@@ -7,15 +7,18 @@ import {
   Modal,
 } from 'react-native';
 import { CalendarList, DateData } from 'react-native-calendars';
+import CalendarIcon from './icons/CalendarIcon';
 
 
-type QuickSelectOption = 'today' | 'week' | 'month' | 'year';
+type QuickSelectOption = 'today' | 'week' | 'month' | 'year' | null;
 
 interface DatePickerProps {
-  value?: string; // Format: YYYY-MM-DD
+  value?: string;
   onDateChange: (date: string) => void;
   minDate?: string;
   maxDate?: string;
+  title?: string; 
+  placeholder?: string;
 }
 
 const DatePicker: React.FC<DatePickerProps> = ({
@@ -23,10 +26,12 @@ const DatePicker: React.FC<DatePickerProps> = ({
   onDateChange,
   minDate,
   maxDate,
+  title = 'Date picker',
+  placeholder = 'Today',
 }) => {
   const [showCalendar, setShowCalendar] = useState<boolean>(false);
   const [tempSelectedDate, setTempSelectedDate] = useState<string>('');
-  const [activeQuickSelect, setActiveQuickSelect] = useState<QuickSelectOption>('today');
+  const [activeQuickSelect, setActiveQuickSelect] = useState<QuickSelectOption>(null);
 
   const formatDateToString = useCallback((date: Date): string => {
     const year = date.getFullYear();
@@ -35,33 +40,35 @@ const DatePicker: React.FC<DatePickerProps> = ({
     return `${year}-${month}-${day}`;
   }, []);
 
-  const handleQuickSelect = useCallback((option: QuickSelectOption) => {
+  const handleQuickSelect = useCallback((option: Exclude<QuickSelectOption, null>) => {
     setActiveQuickSelect(option);
     const today = new Date();
-    
+
     let targetDate: Date;
     switch (option) {
       case 'today':
         targetDate = today;
         break;
       case 'week':
+        // End of current week (Saturday)
         targetDate = new Date(today);
-        targetDate.setDate(today.getDate() + (7 - today.getDay()));
+        targetDate.setDate(today.getDate() + (6 - today.getDay()));
         break;
       case 'month':
+        // End of current month
         targetDate = new Date(today.getFullYear(), today.getMonth() + 1, 0);
         break;
       case 'year':
         targetDate = new Date(today.getFullYear(), 11, 31);
         break;
     }
-    
+
     setTempSelectedDate(formatDateToString(targetDate));
   }, [formatDateToString]);
 
   const onDayPress = useCallback((day: DateData) => {
     setTempSelectedDate(day.dateString);
-    setActiveQuickSelect('today');
+    setActiveQuickSelect(null); // Bỏ active tất cả quick select khi chọn thủ công
   }, []);
 
   const handleApply = useCallback(() => {
@@ -71,23 +78,30 @@ const DatePicker: React.FC<DatePickerProps> = ({
 
   const handleOpen = useCallback(() => {
     const today = new Date();
-    setTempSelectedDate(value || formatDateToString(today));
+    const todayString = formatDateToString(today);
+    const dateToUse = value || todayString;
+
+    setTempSelectedDate(dateToUse);
+    // Nếu ngày hiện tại là today thì active 'today', không thì null
+    setActiveQuickSelect(dateToUse === todayString ? 'today' : null);
     setShowCalendar(true);
   }, [value, formatDateToString]);
 
   const formatDisplayDate = useCallback((dateString: string): string => {
-    if (!dateString) return 'Today';
-    const date = new Date(dateString);
+    if (!dateString) return placeholder;
+    // Fix timezone issue
+    const [year, month, day] = dateString.split('-').map(Number);
+    const date = new Date(year, month - 1, day);
     return date.toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'short',
       day: 'numeric',
     });
-  }, []);
+  }, [placeholder]);
 
   const getMarkedDates = useCallback(() => {
     if (!tempSelectedDate) return {};
-    
+
     return {
       [tempSelectedDate]: {
         selected: true,
@@ -103,6 +117,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
         onPress={handleOpen}
         activeOpacity={0.7}
       >
+        <CalendarIcon />
         <Text style={[styles.inputText, !value && styles.placeholder]}>
           {formatDisplayDate(value || '')}
         </Text>
@@ -117,8 +132,8 @@ const DatePicker: React.FC<DatePickerProps> = ({
         <View style={styles.modalContainer}>
           <View style={styles.calendarContainer}>
             <View style={styles.header}>
-              <Text style={styles.headerTitle}>Date picker</Text>
-              <TouchableOpacity 
+              <Text style={styles.headerTitle}>{title}</Text>
+              <TouchableOpacity
                 onPress={() => setShowCalendar(false)}
                 style={styles.closeButton}
                 activeOpacity={0.7}
@@ -194,6 +209,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
             </View>
 
             <CalendarList
+              showsVerticalScrollIndicator={false}
               current={tempSelectedDate || undefined}
               onDayPress={onDayPress}
               markedDates={getMarkedDates()}
@@ -238,7 +254,6 @@ const DatePicker: React.FC<DatePickerProps> = ({
               <Text style={styles.applyButtonText}>Apply</Text>
             </TouchableOpacity>
 
-            <View style={styles.bottomHandle} />
           </View>
         </View>
       </Modal>
@@ -250,35 +265,32 @@ const styles = StyleSheet.create({
   input: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    gap: 8,
     backgroundColor: '#FFFFFF',
     borderWidth: 1,
     borderColor: '#E5E7EB',
-    borderRadius: 10,
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    width: 180,
-    elevation: 4,
-    margin: 22,
-    height: 44,
+    borderRadius: 8,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    alignSelf: 'flex-start',
+  },
+  calendarIcon: {
+    fontSize: 16,
   },
   inputText: {
-    fontSize: 15,
+    fontSize: 14,
     color: '#1A1A1A',
-    fontWeight: '500',
-  },
-  placeholder: {
-    color: '#9CA3AF',
     fontWeight: '400',
   },
-  icon: {
-    fontSize: 18,
+  placeholder: {
+    color: '#6B7280',
+    fontWeight: '400',
   },
   modalContainer: {
     flex: 1,
     justifyContent: 'flex-end',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    
+    backgroundColor: 'rgba(0, 0, 0, 0.5)'
+
   },
   calendarContainer: {
     backgroundColor: '#FFFFFF',
@@ -299,7 +311,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
     fontWeight: '600',
     color: '#1A1A1A',
-    alignContent:'center'
+    alignContent: 'center'
   },
   closeButton: {
     width: 28,

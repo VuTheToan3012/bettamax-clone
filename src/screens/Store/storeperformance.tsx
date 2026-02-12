@@ -6,7 +6,8 @@ import CR from './CR'
 import TopProductBarChart from './TopProduct'
 import SessionByDeviceChart from './session'
 import DatePicker from '@/components/Calendar'
-
+import BottomTabs from '@/navigation/BottomTabs';
+import PerformanceHeader from '@/components/PerformanceHeader'
 const STORE_PERFORMANCE_DATA = {
   '1': [7000, 9000, 6000, 10000, 4000, 8000, 5000, 9000, 3000, 6000],
   '2': [5000, 7000, 8000, 6000, 9000, 7000, 8000, 10000, 6000, 8000],
@@ -26,20 +27,23 @@ const Storeperformance = () => {
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: '#F9FAFB' }}>
+    <View style={{ flex: 1, backgroundColor: '#f7f7f8' }}>
+      <PerformanceHeader />
       <View style={{ padding: 16 }}>
         <DatePicker
           value={selectedDate}
           onDateChange={handleDateChange}
 
         />
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
           <RevenueChart data={revenueData} />
           <CR />
           <TopProductBarChart />
           <SessionByDeviceChart />
         </ScrollView>
+
       </View>
+      <BottomTabs />
     </View>
   )
 }

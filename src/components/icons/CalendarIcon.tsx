@@ -1,6 +1,36 @@
-import React from 'react';
-import type { SVGProps } from 'react';
+import * as React from "react"
+import Svg, { Path, SvgProps } from "react-native-svg"
 
-export function CalendarIcon(props: SVGProps<SVGSVGElement>) {
-	return (<svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" {...props}><path fill="currentColor" d="M5 22q-.825 0-1.412-.587T3 20V6q0-.825.588-1.412T5 4h1V2h2v2h8V2h2v2h1q.825 0 1.413.588T21 6v14q0 .825-.587 1.413T19 22zm0-2h14V10H5zM5 8h14V6H5zm0 0V6z"></path></svg>);
+function CalendarIcon(props: SvgProps) {
+	return (
+		<Svg
+			width={13}
+			height={14}
+			viewBox="0 0 13 14"
+			fill="none"
+
+			{...props}
+		>
+			<Path
+				fillRule="evenodd"
+				clipRule="evenodd"
+				d="M4.375 0v3.75h-1.25V0h1.25zM9.375 0v3.75h-1.25V0h1.25z"
+				fill="#546278"
+			/>
+			<Path
+				fillRule="evenodd"
+				clipRule="evenodd"
+				d="M1.875 2.5a.625.625 0 00-.625.625v8.75c0 .345.28.625.625.625h8.75c.345 0 .625-.28.625-.625v-8.75a.625.625 0 00-.625-.625h-8.75zM0 3.125C0 2.089.84 1.25 1.875 1.25h8.75c1.036 0 1.875.84 1.875 1.875v8.75c0 1.036-.84 1.875-1.875 1.875h-8.75A1.875 1.875 0 010 11.875v-8.75z"
+				fill="#546278"
+			/>
+			<Path
+				fillRule="evenodd"
+				clipRule="evenodd"
+				d="M0 5h12.5v1.25H0V5z"
+				fill="#546278"
+			/>
+		</Svg>
+	)
 }
+
+export default CalendarIcon
