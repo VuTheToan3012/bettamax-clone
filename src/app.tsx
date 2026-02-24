@@ -12,6 +12,9 @@ import DatePicker from './components/Calendar';
 import Product from './screens/Store/Product/ProducPerformance';
 import Traffic from './screens/Store/Product/Traffic';
 import BottomTabs from './navigation/BottomTabs';
+import Allorders from './screens/Allorders';
+import OrderList from './screens/Allorders/OrderList';
+import OrderScreen from './screens/Test/OrderScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,12 +25,12 @@ const App = () => {
         {/* <Stack.Screen name="SplashScreen" component={SplashScreen} options={{ headerShown: false }} />
         <Stack.Screen name="SignIn" component={SignIn} options={{ headerShown: false }} />
         <Stack.Screen name="Intermediate" component={Intermediate} options={{ headerShown: false }} /> 
-        <Stack.Screen name="Datepicker" component={DatePicker} options={{ headerShown: false }} /> */}
-        {/* <Stack.Screen name="Traffic" component={Traffic} options={{ headerShown: false }} /> */}
+        <Stack.Screen name="Datepicker" component={DatePicker} options={{ headerShown: false }} />
+        <Stack.Screen name="Traffic" component={Traffic} options={{ headerShown: false }} />
         <Stack.Screen name="Store" component={Store} options={{ headerShown: false }} />
 
-        <Stack.Screen name="Storeperformance" component={Storeperformance} options={{ headerShown: false }} />
-
+        <Stack.Screen name="Storeperformance" component={Storeperformance} options={{ headerShown: false }} /> */}
+        <Stack.Screen name="Allorders" component={Allorders} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
 

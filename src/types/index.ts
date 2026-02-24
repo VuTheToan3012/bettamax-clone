@@ -211,3 +211,59 @@ const DATA: Product[] = [
     },
 ];
 export default DATA;
+
+//order
+export interface Order {
+  id: string;
+  orderCode: string;
+  orderNumber: number;
+  date: string;
+  time: string;
+  total: number;
+  currency: string;
+  paymentStatus: "Paid" | "Unpaid" | "Refunded";
+  fulfillmentStatus: "Fulfilled" | "Unfulfilled" | "Processing";
+  taxIncluded: boolean;
+  hasNote: boolean;
+}
+export const ORDERS: Order[] = [
+  {
+    id: "1",
+    orderCode: "ZO3FA-180425-BYHFA",
+    orderNumber: 12001,
+    date: "2025-11-26",
+    time: "17:00",
+    total: 145.63,
+    currency: "USD",
+    paymentStatus: "Paid",
+    fulfillmentStatus: "Unfulfilled",
+    taxIncluded: true,
+    hasNote: true,
+  },
+  {
+    id: "2",
+    orderCode: "AB2CD-190425-KLMNO",
+    orderNumber: 12002,
+    date: "2025-11-27",
+    time: "09:30",
+    total: 89.99,
+    currency: "USD",
+    paymentStatus: "Unpaid",
+    fulfillmentStatus: "Processing",
+    taxIncluded: false,
+    hasNote: false,
+  },
+  {
+    id: "3",
+    orderCode: "ZX9PQ-200425-RTYUI",
+    orderNumber: 12003,
+    date: "2025-11-28",
+    time: "14:45",
+    total: 250.0,
+    currency: "USD",
+    paymentStatus: "Paid",
+    fulfillmentStatus: "Fulfilled",
+    taxIncluded: true,
+    hasNote: true,
+  },
+];

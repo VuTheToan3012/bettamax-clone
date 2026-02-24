@@ -22,21 +22,15 @@ export interface CRChartItem {
 }
 
 interface CRChartProps {
-    data: CRChartItem[];
+    data?: CRChartItem[];
 }
 
 const CR = ({ data: propData }: CRChartProps) => {
-    const data: CRChartItem[] = [
+    const data: CRChartItem[] = propData || [
         { label: 'View product', value: 1457, percent: '100%' },
         { label: 'Add to cart', value: 729, percent: '52%' },
         { label: 'Reach CO', value: 378, percent: '26%' },
         { label: 'Total order', value: 137, percent: '10.53%' },
-    ];
-    const data2: CRChartItem[] = [
-        { label: 'View product', value: 1457, percent: '100%' },
-        { label: 'Add to cart', value: 729, percent: '52%' },
-        { label: 'Reach CO', value: 378, percent: '26%' },
-        { label: 'Total order', value: 145, percent: '10.53%' },
     ];
 
     const maxValue = Math.max(...data.map(d => d.value));

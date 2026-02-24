@@ -8,6 +8,7 @@ import SessionByDeviceChart from './session'
 import DatePicker from '@/components/Calendar'
 import BottomTabs from '@/navigation/BottomTabs';
 import PerformanceHeader from '@/components/PerformanceHeader'
+
 const STORE_PERFORMANCE_DATA = {
   '1': [7000, 9000, 6000, 10000, 4000, 8000, 5000, 9000, 3000, 6000],
   '2': [5000, 7000, 8000, 6000, 9000, 7000, 8000, 10000, 6000, 8000],
@@ -16,12 +17,12 @@ const STORE_PERFORMANCE_DATA = {
 
 const Storeperformance = () => {
   const route = useRoute();
-  const { storeId, storeName } = route.params;
-
+  const { storeId, storeName } = route.params as { storeId: string; storeName: string };
 
   const [selectedDate, setSelectedDate] = useState('');
 
-  const revenueData = STORE_PERFORMANCE_DATA[storeId] || STORE_PERFORMANCE_DATA['1'];
+  const revenueData = STORE_PERFORMANCE_DATA[storeId as keyof typeof STORE_PERFORMANCE_DATA] || STORE_PERFORMANCE_DATA['1'];
+  
   const handleDateChange = (date: string) => {
     setSelectedDate(date);
   };
@@ -33,7 +34,6 @@ const Storeperformance = () => {
         <DatePicker
           value={selectedDate}
           onDateChange={handleDateChange}
-
         />
         <ScrollView showsVerticalScrollIndicator={false}>
           <RevenueChart data={revenueData} />
@@ -41,7 +41,6 @@ const Storeperformance = () => {
           <TopProductBarChart />
           <SessionByDeviceChart />
         </ScrollView>
-
       </View>
       <BottomTabs />
     </View>

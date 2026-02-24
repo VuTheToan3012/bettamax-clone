@@ -133,13 +133,15 @@ const DatePicker: React.FC<DatePickerProps> = ({
           <View style={styles.calendarContainer}>
             <View style={styles.header}>
               <Text style={styles.headerTitle}>{title}</Text>
-              <TouchableOpacity
+                  <View style={{justifyContent:'center'}}>
+                <TouchableOpacity
                 onPress={() => setShowCalendar(false)}
                 style={styles.closeButton}
                 activeOpacity={0.7}
               >
                 <Text style={styles.closeButtonText}>×</Text>
               </TouchableOpacity>
+              </View>
             </View>
 
             <View style={styles.quickSelectContainer}>
@@ -299,13 +301,14 @@ const styles = StyleSheet.create({
     paddingTop: 16,
     paddingHorizontal: 16,
     paddingBottom: 20,
-    maxHeight: '75%',
+    maxHeight: '86%',
   },
   header: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 12,
+    
   },
   headerTitle: {
     fontSize: 17,
@@ -350,15 +353,17 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   calendarList: {
-    maxHeight: 380,
+    height: 600
   },
   applyButton: {
     backgroundColor: '#5B5FEF',
     paddingVertical: 13,
-    borderRadius: 10,
+    borderRadius: 99,
     alignItems: 'center',
     marginTop: 12,
     marginBottom: 8,
+    
+    
   },
   applyButtonText: {
     color: '#FFFFFF',
