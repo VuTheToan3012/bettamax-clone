@@ -1,53 +1,20 @@
-//index
 import { StyleSheet, Text, View, FlatList, Image, Pressable } from 'react-native'
 import React from 'react'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import Header from '@/components/Header';
 import { useNavigation } from '@react-navigation/native';
 import StoreIcon from '@/components/icons/StoreIcon';
+import { STORE, STORE_DATA } from '@/types';
+import { useShopStore } from '@/stores/store';
 
-
-export interface Store {
-    id: string;
-    name: string;
-    status: 'Open' | 'Deactivated';
-    fulfillment: string;
-    website: string;
-    role: 'Owner' | 'Staff';
-}
-
-export const DATA: Store[] = [
-    {
-        id: '1',
-        name: 'Dianne Russell',
-        fulfillment: 'Tu Nguyen',
-        website: 'diannerussell.com',
-        status: 'Open',
-        role: 'Owner',
-    },
-    {
-        id: '2',
-        name: 'Nineteen Eighty-Four',
-        fulfillment: 'Self fulfill store',
-        website: 'nineteeneightyfour.shop',
-        status: 'Open',
-        role: 'Owner',
-    },
-    {
-        id: '3',
-        name: 'Starship Troopers',
-        fulfillment: 'FusionEdge Fulfillment',
-        website: 'starshiptroopers.us',
-        status: 'Deactivated',
-        role: 'Staff',
-    },
-];
-
-const StoreCard = ({ item }: { item: Store }) => {
+const StoreCard = ({ item }: { item: STORE }) => {
     const navigation = useNavigation();
+    const { setSelectedStore} = useShopStore();
 
+    
     const handlePress = () => {
-        navigation.navigate('Storeperformance', { storeId: item.id, storeName: item.name });
+        setSelectedStore(item);
+        navigation.navigate('Storeperformance');
     };
 
     return (
@@ -57,8 +24,14 @@ const StoreCard = ({ item }: { item: Store }) => {
                 <View style={styles.content}>
                     <Text style={styles.name}>{item.name}</Text>
                     <Text style={styles.text}>
-                        Fulfillment: <Text style={styles.textFulfillment} numberOfLines={1}
-                            ellipsizeMode="tail">{item.fulfillment}</Text>
+                        {item.fulfillment !== 'Self fulfill store' && 'Fulfillment: '}
+                        <Text
+                            style={styles.textFulfillment}
+                            numberOfLines={1}
+                            ellipsizeMode="tail"
+                        >
+                            {item.fulfillment}
+                        </Text>
                     </Text>
                     <Text style={styles.text}>{item.website}</Text>
                 </View>
@@ -86,11 +59,12 @@ const Store = () => {
                 <Header />
                 <View style={styles.card}>
                     <FlatList
-                        data={DATA}
+                        data={STORE_DATA}
                         keyExtractor={(item) => item.id}
                         renderItem={({ item }) => <StoreCard item={item} />}
                     />
                 </View>
+                
             </SafeAreaView>
         </SafeAreaProvider>
     );
@@ -183,12 +157,12 @@ const styles = StyleSheet.create({
         fontFamily: 'Mona Sans',
         fontWeight: '400',
     },
-    iconborder:{
-        width:24,
-        height:24,
-        borderRadius:5,
-        backgroundColor:'#D6D4FE',
-        alignItems:'center',
-        justifyContent:'center'
+    iconborder: {
+        width: 24,
+        height: 24,
+        borderRadius: 5,
+        backgroundColor: '#D6D4FE',
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 });

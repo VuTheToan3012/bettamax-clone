@@ -50,12 +50,12 @@ const DatePicker: React.FC<DatePickerProps> = ({
         targetDate = today;
         break;
       case 'week':
-        // End of current week (Saturday)
+
         targetDate = new Date(today);
         targetDate.setDate(today.getDate() + (6 - today.getDay()));
         break;
       case 'month':
-        // End of current month
+
         targetDate = new Date(today.getFullYear(), today.getMonth() + 1, 0);
         break;
       case 'year':
@@ -68,7 +68,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
 
   const onDayPress = useCallback((day: DateData) => {
     setTempSelectedDate(day.dateString);
-    setActiveQuickSelect(null); // Bỏ active tất cả quick select khi chọn thủ công
+    setActiveQuickSelect(null); 
   }, []);
 
   const handleApply = useCallback(() => {
@@ -82,14 +82,14 @@ const DatePicker: React.FC<DatePickerProps> = ({
     const dateToUse = value || todayString;
 
     setTempSelectedDate(dateToUse);
-    // Nếu ngày hiện tại là today thì active 'today', không thì null
+   
     setActiveQuickSelect(dateToUse === todayString ? 'today' : null);
     setShowCalendar(true);
   }, [value, formatDateToString]);
 
   const formatDisplayDate = useCallback((dateString: string): string => {
     if (!dateString) return placeholder;
-    // Fix timezone issue
+   
     const [year, month, day] = dateString.split('-').map(Number);
     const date = new Date(year, month - 1, day);
     return date.toLocaleDateString('en-US', {
@@ -224,6 +224,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
               calendarHeight={320}
               minDate={minDate}
               maxDate={maxDate}
+              hideDayNames={true}
               theme={{
                 backgroundColor: '#FFFFFF',
                 calendarBackground: '#FFFFFF',

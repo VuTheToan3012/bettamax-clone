@@ -46,8 +46,8 @@ safe: {
   right: 0,
   backgroundColor: '#fff',
 
-  zIndex: 1000,
-  elevation: 1000, // Android sống chết cần
+  // zIndex: 1000,
+  // elevation: 1000, 
 },
   container: {
     height: 56,
@@ -57,7 +57,7 @@ safe: {
     justifyContent: "space-between",
     borderBottomWidth: 1,
     borderBottomColor: "#eee",
-    position: 'relative', // QUAN TRỌNG
+    position: 'relative', 
     zIndex: 100,
   },
   left: {
@@ -87,14 +87,13 @@ safe: {
   },
   dropdown: {
     position: 'absolute',
-    top: 56,          // ngay dưới header
+    top: 56,          
     right: 16,
     backgroundColor: '#fff',
     borderRadius: 8,
     paddingVertical: 8,
-
-    zIndex: 1000,
-    elevation: 1000, // Android
+    // zIndex: 1000,
+    // elevation: 1000, 
 
     shadowColor: '#000',
     shadowOpacity: 0.2,

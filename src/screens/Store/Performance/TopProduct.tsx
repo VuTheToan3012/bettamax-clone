@@ -32,7 +32,7 @@ const DATA = [
   },
 ];
 
-/* ================= CONFIG ================= */
+
 
 const LEFT_TEXT_WIDTH = 190;
 const BAR_AREA_WIDTH = 120;
@@ -40,14 +40,14 @@ const ROW_HEIGHT = 28;
 const BAR_HEIGHT = 28;
 const BAR_RADIUS = 6;
 
-/* ================= UTILS ================= */
+
 
 const formatK = (value: number) => {
   if (value >= 1000) return (value / 1000).toFixed(1) + "k";
   return value.toString();
 };
 
-/* ================= COMPONENT ================= */
+
 
 export default function TopProductBarChart() {
   const maxValue = Math.max(...DATA.map(i => i.value));
@@ -70,7 +70,7 @@ export default function TopProductBarChart() {
 
           return (
             <View key={item.id} style={styles.rowContainer}>
-              {/* Tooltip hiển thị tên đầy đủ - ĐẶT TRÊN ĐẦU */}
+   
               {isSelected && (
                 <View style={styles.tooltip}>
                   <Text style={styles.tooltipText}>{item.name}</Text>
@@ -78,12 +78,12 @@ export default function TopProductBarChart() {
               )}
 
               <View style={styles.row}>
-                {/* Product name */}
+          
                 <Text numberOfLines={1} style={styles.label}>
                   {item.name}
                 </Text>
 
-                {/* Chart - click để toggle */}
+               
                 <TouchableOpacity 
                   activeOpacity={0.7}
                   onPress={() => handleBarPress(item.id)}
@@ -92,7 +92,6 @@ export default function TopProductBarChart() {
                     width={BAR_AREA_WIDTH + 40}
                     height={ROW_HEIGHT}
                   >
-                    {/* Bar - đổi màu khi được chọn */}
                     <Rect
                       x={0}
                       y={(ROW_HEIGHT - BAR_HEIGHT) / 2}
@@ -102,7 +101,7 @@ export default function TopProductBarChart() {
                       fill={isSelected ? "#22C55E" : "#7AE0A3"}
                     />
 
-                    {/* Value */}
+  
                     <SvgText
                       x={barWidth + 8}
                       y={ROW_HEIGHT / 2 + 4}
@@ -126,7 +125,7 @@ export default function TopProductBarChart() {
   );
 }
 
-/* ================= STYLES ================= */
+
 
 const styles = StyleSheet.create({
   card: {
@@ -162,7 +161,7 @@ const styles = StyleSheet.create({
   },
   tooltip: {
     position: "absolute",
-    bottom: ROW_HEIGHT + 4, // Đặt phía trên thanh bar
+    bottom: ROW_HEIGHT + 4, 
     left: 0,
     right: 0,
     backgroundColor: "rgba(0, 0, 0, 0.85)",

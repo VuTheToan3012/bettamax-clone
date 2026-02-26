@@ -2,6 +2,8 @@ import React from 'react';
 import { View, Text, StyleSheet, Image, FlatList } from 'react-native';
 import DATA from '@/types';
 import type { Product } from '@/types';
+import BottomDropdown from '@/components/BottomMenu';
+import DatePicker from '@/components/Calendar';
 const ProductItem = ({ item }: { item: Product }) => {
     return (
         <View style={styles.card}>
@@ -34,17 +36,34 @@ const ProductItem = ({ item }: { item: Product }) => {
 
 export default function Traffic() {
     return (
-        <FlatList
+        <View>
+           <DatePicker />
+            <FlatList
 
-            data={DATA}
-            keyExtractor={(item) => item.id}
-            renderItem={({ item }) => <ProductItem item={item} />}
-            contentContainerStyle={{ padding: 16 }}
-            showsVerticalScrollIndicator={false}
-        />
+                data={DATA}
+                keyExtractor={(item) => item.id}
+                renderItem={({ item }) => <ProductItem item={item} />}
+                contentContainerStyle={{ padding: 16 }}
+                showsVerticalScrollIndicator={false}
+              
+
+            />
+            <View style={styles.bottom}>
+                <BottomDropdown />
+            </View>
+        </View>
     );
 }
 const styles = StyleSheet.create({
+    bottom: {
+  position: "absolute",
+  bottom: 0,
+  left: 0,
+  right: 0,
+  paddingBottom: 20,
+  backgroundColor: "#fff",
+  borderRadius: 12,
+},
     card: {
         flexDirection: 'row',
         backgroundColor: '#F7F8FA',
@@ -95,7 +114,7 @@ const styles = StyleSheet.create({
     traffic: {
         borderRadius: 24,
         backgroundColor: "#48ddc7",
-        alignContent:'center',
+        alignContent: 'center',
         justifyContent: 'center'
     }
 });

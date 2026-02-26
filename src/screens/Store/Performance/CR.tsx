@@ -38,9 +38,6 @@ const CR = ({ data: propData }: CRChartProps) => {
     const barWidth =
         (WIDTH - PADDING * 2 - BAR_GAP * (data.length - 1)) / data.length;
 
-    /* =========================
-       Smooth line ÔM SƯỜN ĐỈNH
-    ========================== */
     const linePoints: { x: number; y: number }[] = [];
 
     data.forEach((item, index) => {
@@ -86,7 +83,7 @@ const CR = ({ data: propData }: CRChartProps) => {
             </View>
 
             <Svg width={WIDTH} height={HEIGHT}>
-                {/* Bars */}
+                
                 {data.map((item, index) => {
                     const barHeight =
                         (item.value / maxValue) * (HEIGHT - PADDING * 2);
@@ -104,8 +101,6 @@ const CR = ({ data: propData }: CRChartProps) => {
                                 rx={8}
                                 fill={colors[index]}
                             />
-
-                            {/* Grid */}
                             <Line
                                 x1={x + barWidth}
                                 y1={PADDING}
@@ -115,9 +110,6 @@ const CR = ({ data: propData }: CRChartProps) => {
                                 strokeWidth={0.8}
                                 strokeDasharray="3 3"
                             />
-
-
-                            {/* Value */}
                             <SvgText
                                 x={x + barWidth / 2}
                                 y={y - 6}
@@ -128,8 +120,6 @@ const CR = ({ data: propData }: CRChartProps) => {
                             >
                                 {item.value}
                             </SvgText>
-
-                            {/* Percent */}
                             <SvgText
                                 x={x + barWidth / 2}
                                 y={y + barHeight / 2 - 8}
@@ -141,7 +131,6 @@ const CR = ({ data: propData }: CRChartProps) => {
                                 {item.percent}
                             </SvgText>
 
-                            {/* Label */}
                             <SvgText
                                 x={x + barWidth / 2}
                                 y={HEIGHT}
@@ -155,7 +144,6 @@ const CR = ({ data: propData }: CRChartProps) => {
                     );
                 })}
 
-                {/* Smooth line ôm sườn đỉnh */}
                 {smoothTopPath && (
                     <Path
                         d={smoothTopPath}

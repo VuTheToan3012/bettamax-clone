@@ -77,7 +77,6 @@ const Allorders = () => {
         <View style={{ flex: 1, backgroundColor: "#F8FAFC" }}>
             <PerformanceHeader />
 
-            {/* SEARCH + FILTER */}
             <View style={styles.topContainer}>
                 <View style={styles.searchBox}>
                     <SearchIcon />
@@ -105,7 +104,6 @@ const Allorders = () => {
 
             <OrderList data={filteredData} />
 
-            {/* MAIN FILTER MODAL */}
             <Modal visible={filterVisible} animationType="slide">
                 <View style={styles.modalContainer}>
                     <View style={styles.header}>
@@ -154,7 +152,6 @@ const Allorders = () => {
                 </View>
             </Modal>
 
-            {/* SUB SHEET */}
             <Modal visible={activeSheet !== null} animationType="slide" transparent>
                 <View style={styles.sheetOverlay}>
                     <View style={styles.sheet}>
@@ -272,7 +269,7 @@ const styles = StyleSheet.create({
         gap: 8,
     },
     filterBtn: {
-        width: 42,
+        width: 81,
         height: 42,
         borderRadius: 12,
         backgroundColor: "#ffffff",
@@ -280,6 +277,7 @@ const styles = StyleSheet.create({
         borderColor: "#E2E8F0",
         justifyContent: "center",
         alignItems: "center",
+        flexDirection: "row",
     },
     text: {
         flex: 1,

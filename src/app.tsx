@@ -7,30 +7,33 @@ import SignIn from './screens/SignIn';
 import Intermediate from './screens/Intermediate/Intermediate';
 import Store from './screens/Store';
 import Header from './components/Header';
-import Storeperformance from './screens/Store/storeperformance';
+import Storeperformance from './screens/Store/Performance/Storeperformance';
 import DatePicker from './components/Calendar';
 import Product from './screens/Store/Product/ProducPerformance';
 import Traffic from './screens/Store/Product/Traffic';
 import BottomTabs from './navigation/BottomTabs';
 import Allorders from './screens/Allorders';
 import OrderList from './screens/Allorders/OrderList';
-import OrderScreen from './screens/Test/OrderScreen';
-
+import { MenuProvider } from 'react-native-popup-menu';
+import ProductPerfomance from './screens/Store/Product/ProducPerformance';
+ProductPerfomance
 const Stack = createNativeStackNavigator();
 
 const App = () => {
   return <>
     <NavigationContainer>
       <Stack.Navigator >
-        {/* <Stack.Screen name="SplashScreen" component={SplashScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="SplashScreen" component={SplashScreen} options={{ headerShown: false }} />
         <Stack.Screen name="SignIn" component={SignIn} options={{ headerShown: false }} />
-        <Stack.Screen name="Intermediate" component={Intermediate} options={{ headerShown: false }} /> 
+        <Stack.Screen name="Intermediate" component={Intermediate} options={{ headerShown: false }} />
         <Stack.Screen name="Datepicker" component={DatePicker} options={{ headerShown: false }} />
+         <Stack.Screen name="Storeperformance" component={Storeperformance} options={{ headerShown: false }} />
         <Stack.Screen name="Traffic" component={Traffic} options={{ headerShown: false }} />
         <Stack.Screen name="Store" component={Store} options={{ headerShown: false }} />
-
-        <Stack.Screen name="Storeperformance" component={Storeperformance} options={{ headerShown: false }} /> */}
+       
+        <Stack.Screen name="ProductPerformance" component={ProductPerfomance} options={{ headerShown: false }} />
         <Stack.Screen name="Allorders" component={Allorders} options={{ headerShown: false }} />
+        <Stack.Screen name="OrderList" component={OrderList} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
 

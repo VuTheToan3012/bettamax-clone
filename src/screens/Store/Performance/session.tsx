@@ -17,7 +17,7 @@ const data: SessionItem[] = [
 ];
 
 
-const COLORS = ["#5B5FED", "#34D399"]; // Xanh dương, Xanh lá
+const COLORS = ["#5B5FED", "#34D399"];
 
 const SIZE = 180;
 const STROKE_WIDTH = 28;
@@ -43,7 +43,7 @@ export default function SessionByDeviceChart() {
       <Text style={styles.title}>Session by device</Text>
 
       <View style={styles.contentContainer}>
-        {/* Legend bên trái */}
+        
         <View style={styles.legendContainer}>
           {data.map((item, index) => {
             const percentage = formatPercentage(item.value, totalValue);
@@ -52,7 +52,7 @@ export default function SessionByDeviceChart() {
 
             return (
               <View key={index} style={styles.legendItem}>
-                {/* Dot */}
+            
                 <View
                   style={[
                     styles.legendDot,
@@ -60,7 +60,7 @@ export default function SessionByDeviceChart() {
                   ]}
                 />
 
-                {/* Info */}
+             
                 <View style={styles.legendInfo}>
                   <Text style={styles.legendLabel}>{item.label}</Text>
                   <View style={styles.statsRow}>

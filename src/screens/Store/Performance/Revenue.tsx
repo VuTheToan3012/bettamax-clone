@@ -3,6 +3,7 @@ import ArrowUpIcon from "@/components/icons/ArrowUpIcon";
 import React from "react";
 import { View, Text } from "react-native";
 import Svg, { Polyline, Path, Circle, Text as SvgText } from "react-native-svg";
+import { LineChart, XAxis , YAxis, Grid } from 'react-native-svg-charts'
 
 const WIDTH = 340;
 const HEIGHT = 180;

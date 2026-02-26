@@ -1,3 +1,4 @@
+//Account
 export interface Account {
   id: string;
   email: string;
@@ -29,9 +30,46 @@ export const USERS: Account[] = [
     avatar: 'https://i.pravatar.cc/150?img=2',
   },
 ];
+// Store
+export interface STORE {
+  id: string;
+  name: string;
+  status: 'Open' | 'Deactivated';
+  fulfillment: string;
+  website: string;
+  role: 'Owner' | 'Staff';
+}
+
+
+export const STORE_DATA: STORE[] = [
+    {
+        id: '1',
+        name: 'Dianne Russell',
+        fulfillment: 'Tu Nguyen',
+        website: 'diannerussell.com',
+        status: 'Open',
+        role: 'Owner',
+    },
+    {
+        id: '2',
+        name: 'Nineteen Eighty-Four',
+        fulfillment: 'Self fulfill store',
+        website: 'nineteeneightyfour.shop',
+        status: 'Open',
+        role: 'Owner',
+    },
+    {
+        id: '3',
+        name: 'Starship Troopers',
+        fulfillment: 'FusionEdge Fulfillment',
+        website: 'starshiptroopers.us',
+        status: 'Deactivated',
+        role: 'Staff',
+    },
+];
 
 interface StoreStats {
-  storeId: string;
+ 
   revenue: number;
   profit: number;
   orders: number;
@@ -42,15 +80,15 @@ export const storePerformanceData: Record<string, {
     revenue: number[];
     previousRevenue: number[];
 }> = {
-    '1': { // Dianne Russell
+    '1': {
         revenue: [7000, 9000, 6000, 10000, 4000, 8000, 5000, 9000, 3000, 6000],
         previousRevenue: [4200, 5200, 6100, 7000, 7800, 8600, 9300, 9800, 10200, 11000],
     },
-    '2': { // Nineteen Eighty-Four
+    '2': { 
         revenue: [5000, 7000, 8000, 9000, 7500, 8500, 9500, 10000, 8000, 9000],
         previousRevenue: [3000, 4000, 5000, 6000, 6500, 7000, 7500, 8000, 8500, 9000],
     },
-    '3': { // Starship Troopers
+    '3': { 
         revenue: [3000, 4000, 3500, 5000, 4500, 6000, 5500, 7000, 6500, 8000],
         previousRevenue: [2000, 3000, 2500, 4000, 3500, 5000, 4500, 6000, 5500, 7000],
     },
@@ -212,7 +250,6 @@ const DATA: Product[] = [
 ];
 export default DATA;
 
-//order
 export interface Order {
   id: string;
   orderCode: string;
